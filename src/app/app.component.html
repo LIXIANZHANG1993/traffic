@@ -1,6 +1,7 @@
+<!--
 <section class="d-flex flex-column justify-content-between position-fixed">
   <div class="sidebar-content">
-    <!--navtab，左側內容-->
+
     <nav class="nav sidebar-menu flex-md-column fw-bold">
       <a class="nav-link pb-md-5" routerLink="taipeiMRT">台北捷運</a>
       <a class="nav-link pb-md-5" routerLink="tayouanMRT">桃園捷運</a>
@@ -10,3 +11,23 @@
 </section>
 
 <router-outlet></router-outlet>
+-->
+
+<mat-drawer-container style="height: 100vh; width:100vw;" autosize>
+  <mat-drawer #drawer style="width: 240px;" mode="over">
+    <mat-action-list>
+      <button mat-list-item routerLink="taipeiMRT">台北捷運</button>
+      <button mat-list-item routerLink="tayouanMRT">桃園捷運</button>
+      <button mat-list-item routerLink="hightwayTransport">國道客運</button>
+    </mat-action-list>
+  </mat-drawer>
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon class="example-icon">menu</mat-icon>
+    </button>
+    <span [style.padding-left]="5+'px'">交通資訊查詢</span>
+  </mat-toolbar>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
