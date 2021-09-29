@@ -28,8 +28,18 @@ export class TaipeiMRTComponent implements OnInit {
   resultInformation: TaipeiMRTinformation[] = [];
 
   doSearch() {
+    if (this.resultInformation) {
+      this.resultInformation = [];
+    }
     this.taipeiMRTsvc.searchPrice(this.queryInformation).subscribe((data) => {
-      console.log(data);
+      this.resultInformation = data;
+      console.log(this.resultInformation);
     });
+  }
+
+  doClean() {
+    this.resultInformation = [];
+    this.queryInformation.startStaion = '';
+    this.queryInformation.endStation = '';
   }
 }

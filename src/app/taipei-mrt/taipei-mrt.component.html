@@ -16,6 +16,7 @@
 
 <mat-tab-group>
   <mat-tab label="票價資訊">
+
     <div [style.display]="'flex'">
       <div [style.margin-left.px]="50">
         <div [style.margin-top.px]="15">
@@ -49,8 +50,36 @@
       <div [style.margin-top.px]="50" [style.margin-left.px]="50">
         <button mat-raised-button color="primary" (click)="doSearch()">查詢</button>
       </div>
+      <div [style.margin-top.px]="50" [style.margin-left.px]="50">
+        <button mat-raised-button color="primary" (click)="doClean()">清除搜尋</button>
+      </div>
     </div>
-
+    <ng-container *ngIf="resultInformation">
+      <ng-container *ngFor="let item of resultInformation">
+        <div class="container" [style.margin-top.px]="200">
+          <h2 class="text-center">票價資訊</h2>
+          <table class="table color text-white table-bordered  text-center h4 align-middle">
+            <tbody>
+              <tr>
+                <th [rowSpan]="2">全票</th>
+                <th [colSpan]="3">優惠票</th>
+              </tr>
+              <tr>
+                <th>敬老票</th>
+                <th>愛心票</th>
+                <th>優待票</th>
+              </tr>
+              <tr>
+                <td *ngFor="let i of item.Fares">
+                  {{i.Price}}
+                  <span>元</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
+    </ng-container>
   </mat-tab>
 
 
