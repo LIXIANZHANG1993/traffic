@@ -15,6 +15,79 @@
 </main> -->
 
 <mat-tab-group>
-  <mat-tab label="票價資訊"> Content 1 </mat-tab>
-  <mat-tab label="時刻表"> Content 2 </mat-tab>
+  <mat-tab label="票價資訊">
+    <div [style.display]="'flex'">
+      <div [style.margin-left.px]="50">
+        <div [style.margin-top.px]="15">
+          <span [style.font-size.px]="22">起點車站</span>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <!--<mat-label>起點車站</mat-label> -->
+            <!--下拉是選單選到的value可以用雙向繫結寫回property，寫在mat-select這裡-->
+            <mat-select placeholder="請選擇起始車站" [(ngModel)]="queryInformation.startStaion">
+              <mat-option *ngFor="let item of station" [value]="item.stationId">
+                {{item.stationName.Zh_tw}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div [style.margin-left.px]="50">
+        <div [style.margin-top.px]="15">
+          <span [style.font-size.px]="22">終點車站</span>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <!--<mat-label>起點車站</mat-label> -->
+            <mat-select placeholder="請選擇終點車站" [(ngModel)]="queryInformation.endStation">
+              <mat-option *ngFor="let item of station" [value]="item.stationId">
+                {{item.stationName.Zh_tw}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div [style.margin-top.px]="50" [style.margin-left.px]="50">
+        <button mat-raised-button color="primary" (click)="doSearch()">查詢</button>
+      </div>
+    </div>
+
+  </mat-tab>
+
+
+  <mat-tab label=" 時刻表">
+    <div [style.display]="'flex'">
+      <div [style.margin-left.px]="50">
+        <div [style.margin-top.px]="15">
+          <span [style.font-size.px]="22">起點車站</span>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <!--<mat-label>起點車站</mat-label> -->
+            <mat-select placeholder="請選擇起始車站" [(ngModel)]="queryInformation.startStaion">
+              <mat-option *ngFor="let item of station" [value]="item.stationId">
+                {{item.stationName.Zh_tw}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div [style.margin-left.px]="50">
+        <div [style.margin-top.px]="15">
+          <span [style.font-size.px]="22">終點車站</span>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <!--<mat-label>起點車站</mat-label> -->
+            <mat-select placeholder="請選擇終點車站" [(ngModel)]="queryInformation.endStation">
+              <mat-option *ngFor="let item of station" [value]="item.stationId">
+                {{item.stationName.Zh_tw}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div [style.margin-top.px]="50" [style.margin-left.px]="50">
+        <button mat-raised-button color="primary" (click)="doSearch()">查詢</button>
+      </div>
+    </div>
+
+  </mat-tab>
 </mat-tab-group>

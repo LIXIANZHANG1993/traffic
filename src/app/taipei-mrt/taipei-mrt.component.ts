@@ -1,4 +1,10 @@
+import { taipeiMRTService } from './taipeiMRT.service';
 import { Component, OnInit } from '@angular/core';
+import {
+  StationId,
+  TaipeiMRTinformation,
+  searchInformation,
+} from './taipei-mrtinformation';
 
 @Component({
   selector: 'app-taipei-mrt',
@@ -6,13 +12,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./taipei-mrt.component.css'],
 })
 export class TaipeiMRTComponent implements OnInit {
-  constructor() {}
+  constructor(private taipeiMRTsvc: taipeiMRTService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.station = this.taipeiMRTsvc.getStationIdInformation();
+  }
 
-  isChoose = true;
+  station: StationId[] = [];
 
-  changeChoose() {
-    this.isChoose = !this.isChoose;
+  queryInformation: searchInformation = {
+    startStaion: '',
+    endStation: '',
+  };
+
+  resultInformation: TaipeiMRTinformation[] = [];
+
+  doSearch() {
+    this.taipeiMRTsvc.searchPrice(this.queryInformation).subscribe((data) => {
+      console.log(data);
+    });
   }
 }
