@@ -70,10 +70,38 @@
                 <th>優待票</th>
               </tr>
               <tr>
-                <td *ngFor="let i of item.Fares">
-                  {{i.Price}}
-                  <span>元</span>
-                </td>
+                <ng-container *ngIf="item.Fares.length == 8; else length4">
+                  <ng-container *ngFor="let i of item.Fares; let odd = odd">
+                    <td *ngIf="odd">
+                      {{i.Price}}
+                      <span>元</span>
+                    </td>
+                  </ng-container>
+                </ng-container>
+                <ng-template #length4>
+                  <td *ngFor="let i of item.Fares">
+                    {{i.Price}}
+                    <span>元</span>
+                  </td>
+                </ng-template>
+
+                <!-- ngSwitch寫法
+                  <ng-container [ngSwitch]="item.Fares.length">
+                  <ng-container *ngSwitchCase="8">
+                    <ng-container *ngFor="let i of item.Fares; let odd = odd">
+                      <td *ngIf="odd">
+                        {{i.Price}}
+                        <span>元</span>
+                      </td>
+                    </ng-container>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="4">
+                    <td *ngFor="let i of item.Fares">
+                      {{i.Price}}
+                      <span>元</span>
+                    </td>
+                  </ng-container>
+                </ng-container> -->
               </tr>
             </tbody>
           </table>
