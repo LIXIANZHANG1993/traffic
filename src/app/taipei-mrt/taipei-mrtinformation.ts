@@ -1,4 +1,4 @@
-export interface TaipeiMRTinformation {
+export interface priceInformation {
   OriginStationID: string;
   OriginStationName: StationName;
   DestinationStationID: string;
@@ -21,9 +21,13 @@ export interface Fare {
   Price: number;
 }
 
-export interface StationId {
-  stationId: string;
-  stationName: StationName;
+export interface StationInformation {
+  StationID: string;
+  StationName: StationName;
+  BikeAllowOnHoliday: boolean;
+  ScrUpdateTime: string;
+  UpdataTime: string;
+  VersionID: number;
 }
 
 export interface searchInformation {

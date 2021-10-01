@@ -1,8 +1,9 @@
+import { filter, map } from 'rxjs/operators';
 import { taipeiMRTService } from './taipeiMRT.service';
 import { Component, OnInit } from '@angular/core';
 import {
-  StationId,
-  TaipeiMRTinformation,
+  StationInformation,
+  priceInformation,
   searchInformation,
 } from './taipei-mrtinformation';
 
@@ -15,27 +16,19 @@ export class TaipeiMRTComponent implements OnInit {
   constructor(private taipeiMRTsvc: taipeiMRTService) {}
 
   ngOnInit(): void {
-    this.station = this.taipeiMRTsvc.getStationIdInformation();
+    this.taipeiMRTsvc
+      .getStationId()
+      .subscribe((data) => data.filter((result) => this.station.push(result)));
   }
 
-  station: StationId[] = [];
+  station: StationInformation[] = [];
 
   queryInformation: searchInformation = {
     startStaion: '',
     endStation: '',
   };
 
-  resultInformation: TaipeiMRTinformation[] = [];
-
-  doSearch() {
-    if (this.resultInformation) {
-      this.resultInformation = [];
-    }
-    this.taipeiMRTsvc.searchPrice(this.queryInformation).subscribe((data) => {
-      this.resultInformation = data;
-      console.log(this.resultInformation);
-    });
-  }
+  resultInformation: priceInformation[] = [];
 
   doClean() {
     this.resultInformation = [];
