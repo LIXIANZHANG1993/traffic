@@ -7,7 +7,7 @@ import {
   searchInformation,
 } from './taipei-mrtinformation';
 import { filter, map, tap } from 'rxjs/operators';
-const jsSHA = require('sha.js');
+const jsSHA = require('./sha1.js');
 
 @Injectable({
   providedIn: 'root',
@@ -1003,9 +1003,11 @@ export class taipeiMRTService {
       );
   }
 
-  getAPItest() {
-    return this.http.get(
-      'https://ptx.transportdata.tw/MOTC/v2/Rail/Metro/ODFare/TRTC?$top=30&$format=JSON',
+  getPriceInformation(
+    obj: searchInformation
+  ): Observable<TaipeiMRTinformation[]> {
+    return this.http.get<TaipeiMRTinformation[]>(
+      `https://ptx.transportdata.tw/MOTC/v2/Rail/Metro/ODFare/TRTC?$filter=contains(OriginStationID,'${obj.startStaion}')%20and%20contains(DestinationStationID,'${obj.endStation}')&format=JSON`,
       {
         headers: this.GetAuthorizationHeader(),
       }

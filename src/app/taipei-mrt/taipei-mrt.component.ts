@@ -42,10 +42,9 @@ export class TaipeiMRTComponent implements OnInit {
     this.queryInformation.startStaion = '';
     this.queryInformation.endStation = '';
   }
-  doTest() {
-    this.taipeiMRTsvc.getAPItest().subscribe((data) => {
-      console.log(data);
-    });
-    console.log(123);
+  priceInformation() {
+    this.taipeiMRTsvc
+      .getPriceInformation(this.queryInformation)
+      .subscribe((data) => (this.resultInformation = data));
   }
 }
