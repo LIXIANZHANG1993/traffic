@@ -17,8 +17,9 @@ export class TaipeiMRTComponent implements OnInit {
 
   ngOnInit(): void {
     this.taipeiMRTsvc
-      .getStationId()
-      .subscribe((data) => data.filter((result) => this.station.push(result)));
+      .getStationInformation()
+      .subscribe((data) => (this.station = data));
+    //.subscribe((data) => data.filter((result) => this.station.push(result)));
   }
 
   station: StationInformation[] = [];
@@ -28,16 +29,16 @@ export class TaipeiMRTComponent implements OnInit {
     endStation: '',
   };
 
-  resultInformation: priceInformation[] = [];
+  priceResultInformation: priceInformation[] = [];
 
   doClean() {
-    this.resultInformation = [];
+    this.priceResultInformation = [];
     this.queryInformation.startStaion = '';
     this.queryInformation.endStation = '';
   }
   priceInformation() {
     this.taipeiMRTsvc
       .getPriceInformation(this.queryInformation)
-      .subscribe((data) => (this.resultInformation = data));
+      .subscribe((data) => (this.priceResultInformation = data));
   }
 }

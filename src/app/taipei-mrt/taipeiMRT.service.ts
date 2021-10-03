@@ -37,7 +37,7 @@ export class taipeiMRTService {
     }; //如果要將js運行在伺服器，可額外加入 'Accept-Encoding': 'gzip'，要求壓縮以減少網路傳輸資料量
   }
 
-  getStationId(): Observable<StationInformation[]> {
+  getStationInformation(): Observable<StationInformation[]> {
     return this.http.get<StationInformation[]>(
       'https://ptx.transportdata.tw/MOTC/v2/Rail/Metro/Station/TRTC?$select=stationID%2CStationName&$format=JSON',
       { headers: this.GetAuthorizationHeader() }
